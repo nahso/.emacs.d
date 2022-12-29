@@ -7,4 +7,7 @@
   (add-hook 'emacs-startup-hook
             (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
 
+(require 'init-utils)
+
+
 (provide 'init)
