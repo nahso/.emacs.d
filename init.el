@@ -8,6 +8,7 @@
             (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
 
 (require 'init-utils)
-
+(require 'init-site-lisp)
+(require 'init-elpa)
 
 (provide 'init)
