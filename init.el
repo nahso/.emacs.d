@@ -10,5 +10,6 @@
 (require 'init-utils)
 (require 'init-site-lisp)
 (require 'init-elpa)
+(require 'init-exec-path) ;; Set up $PATH
 
 (provide 'init)
