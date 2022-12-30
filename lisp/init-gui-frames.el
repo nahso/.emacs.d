@@ -53,6 +53,10 @@
 (add-hook 'after-init-hook 'default-text-scale-mode)
 
 (require-package 'disable-mouse)
+(global-display-line-numbers-mode 1)
+(setq display-line-numbers-type 'relative)
 
+(require-package 'color-theme-approximate)
+(color-theme-approximate-on)
 
 (provide 'init-gui-frames)

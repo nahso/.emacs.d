@@ -66,6 +66,34 @@
   :prefix "SPC"
   :states '(normal visual))
 (my-space-leader-def
- "fs" 'save-buffer)
+  "fs" 'save-buffer
+  "fr" 'counsel-recentf
+  "wh" 'evil-window-left
+  "wl" 'evil-window-right
+  "wj" 'evil-window-bottom
+  "wk" 'evil-window-top
+  "wo" 'delete-other-windows
+  "wd" 'delete-window
+  "wc" 'delete-window
+  "bb" 'ivy-switch-buffer)
+
+(require-package 'powerline-evil)
+(powerline-evil-vim-color-theme)
+(display-time-mode t)
+
+;; flycheck
+(require-package 'flycheck)
+(add-hook 'after-init-hook #'global-flycheck-mode)
+(with-eval-after-load 'flycheck
+       (setq flycheck-check-syntax-automatically '(save mode-enabled))
+       (setq flycheck-checkers (delq 'emacs-lisp-checkdoc flycheck-checkers))
+       (setq flycheck-checkers (delq 'html-tidy flycheck-checkers))
+       (setq flycheck-standard-error-navigation nil))
+
+(global-flycheck-mode t)
+
+(setq save-place-file "~/.emacs.d/saveplace")
+(setq-default save-place t)
+(require-package 'saveplace)
 
 (provide 'init-evil)
