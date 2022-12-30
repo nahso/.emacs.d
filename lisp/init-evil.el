@@ -75,7 +75,8 @@
   "wo" 'delete-other-windows
   "wd" 'delete-window
   "wc" 'delete-window
-  "bb" 'ivy-switch-buffer)
+  "bb" 'ivy-switch-buffer
+  "rc" '(lambda () (find-file "~/.emacs.d/init.el")))
 
 (require-package 'powerline-evil)
 (powerline-evil-vim-color-theme)

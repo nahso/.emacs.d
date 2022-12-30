@@ -1,12 +1,5 @@
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
-;; Adjust garbage collection thresholds during startup, and thereafter
-;(let ((normal-gc-cons-threshold (* 20 1024 1024))
-;      (init-gc-cons-threshold (* 128 1024 1024)))
-;  (setq gc-cons-threshold init-gc-cons-threshold)
-;  (add-hook 'emacs-startup-hook
-;            (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
-
 (require 'init-utils)
 (require 'init-site-lisp)
 (require 'init-elpa)
@@ -17,15 +10,15 @@
 (maybe-require-package 'scratch)
 (require-package 'command-log-mode)
 
-(require 'init-frame-hooks)
-(require 'init-theme)
-(require 'init-gui-frames)
+(require 'init-ui)
+;(require 'init-frame-hooks)
+;(require 'init-theme)
+;(require 'init-gui-frames)
 
 (require 'init-evil)
 (require 'init-company)
 
 (require-package 'cuda-mode)
-
 
 (setq make-backup-files nil) ; stop creating backup~ files
 (setq auto-save-default nil) ; stop creating #autosave# files
