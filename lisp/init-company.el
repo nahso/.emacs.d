@@ -35,4 +35,7 @@ In that case, insert the number."
      (number-sequence 0 9)))
   )
 
+(require-package 'yasnippet)
+(yas-global-mode 1)
+
 (provide 'init-company)

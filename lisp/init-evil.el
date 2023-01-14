@@ -7,6 +7,12 @@
 (setq-default evil-escape-delay 0.2)
 (setq evil-escape-inhibit-functions '(evil-visual-state-p))
 
+(unless (display-graphic-p)
+  (require-package 'evil-terminal-cursor-changer)
+  (evil-terminal-cursor-changer-activate) ; or (etcc-on)
+  (blink-cursor-mode 0)
+  )
+
 (require-package 'avy)
 (define-key evil-normal-state-map (kbd "s") 'avy-goto-char-2)
 (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
@@ -16,12 +22,12 @@
 ;; @see http://stackoverflow.com/questions/18102004/emacs-evil-mode-how-to-create-a-new-text-object-to-select-words-with-any-non-sp
 (defmacro my-evil-define-and-bind-text-object (key start-regex end-regex)
   (let* ((inner-name (make-symbol "inner-name"))
-         (outer-name (make-symbol "outer-name")))
+	 (outer-name (make-symbol "outer-name")))
     `(progn
        (evil-define-text-object ,inner-name (count &optional beg end type)
-         (evil-select-paren ,start-regex ,end-regex beg end type count nil))
+	 (evil-select-paren ,start-regex ,end-regex beg end type count nil))
        (evil-define-text-object ,outer-name (count &optional beg end type)
-         (evil-select-paren ,start-regex ,end-regex beg end type count t))
+	 (evil-select-paren ,start-regex ,end-regex beg end type count t))
        (define-key evil-inner-text-objects-map ,key (quote ,inner-name))
        (define-key evil-outer-text-objects-map ,key (quote ,outer-name)))))
 ;; between equal signs
@@ -67,6 +73,7 @@
   :states '(normal visual))
 (my-space-leader-def
   "fs" 'save-buffer
+  "ff" 'find-file
   "fr" 'counsel-recentf
   "wh" 'evil-window-left
   "wl" 'evil-window-right
@@ -76,7 +83,7 @@
   "wd" 'delete-window
   "wc" 'delete-window
   "bb" 'ivy-switch-buffer
-  "rc" '(lambda () (find-file "~/.emacs.d/init.el")))
+  "t" 'tags-search)
 
 (require-package 'powerline-evil)
 (powerline-evil-vim-color-theme)
@@ -86,15 +93,14 @@
 (require-package 'flycheck)
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (with-eval-after-load 'flycheck
-       (setq flycheck-check-syntax-automatically '(save mode-enabled))
-       (setq flycheck-checkers (delq 'emacs-lisp-checkdoc flycheck-checkers))
-       (setq flycheck-checkers (delq 'html-tidy flycheck-checkers))
-       (setq flycheck-standard-error-navigation nil))
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (setq flycheck-checkers (delq 'emacs-lisp-checkdoc flycheck-checkers))
+  (setq flycheck-checkers (delq 'html-tidy flycheck-checkers))
+  (setq flycheck-standard-error-navigation nil))
 
 (global-flycheck-mode t)
 
-(setq save-place-file "~/.emacs.d/saveplace")
-(setq-default save-place t)
-(require-package 'saveplace)
+(save-place-mode 1)
+(global-auto-revert-mode 1)
 
 (provide 'init-evil)
