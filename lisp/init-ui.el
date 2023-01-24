@@ -9,8 +9,8 @@ Selectively runs either `after-make-console-frame-hooks' or
 `after-make-window-system-frame-hooks'"
   (with-selected-frame frame
     (run-hooks (if window-system
-                   'after-make-window-system-frame-hooks
-                 'after-make-console-frame-hooks))))
+		   'after-make-window-system-frame-hooks
+		 'after-make-console-frame-hooks))))
 
 (add-hook 'after-make-frame-functions 'run-after-make-frame-hooks)
 
@@ -18,10 +18,10 @@ Selectively runs either `after-make-console-frame-hooks' or
   "The frame (if any) active during Emacs initialization.")
 
 (add-hook 'after-init-hook
-          (lambda () (when sanityinc/initial-frame
-                  (run-after-make-frame-hooks sanityinc/initial-frame))))
+	  (lambda () (when sanityinc/initial-frame
+		       (run-after-make-frame-hooks sanityinc/initial-frame))))
 
-(require-package 'spacemacs-theme)
+(package-install 'spacemacs-theme)
 
 ;; Don't prompt to confirm theme safety. This avoids problems with
 ;; first-time startup on Emacs > 26.3.
@@ -63,25 +63,23 @@ Selectively runs either `after-make-console-frame-hooks' or
 
 (setq frame-title-format
       '((:eval (if (buffer-file-name)
-                   (abbreviate-file-name (buffer-file-name))
-                 "%b"))))
+		   (abbreviate-file-name (buffer-file-name))
+		 "%b"))))
 
 ;; Non-zero values for `line-spacing' can mess up ansi-term and co,
 ;; so we zero it explicitly in those cases.
 (add-hook 'term-mode-hook
-          (lambda ()
-            (setq line-spacing 0)))
+	  (lambda ()
+	    (setq line-spacing 0)))
 
 ;; Change global font size easily
-(require-package 'default-text-scale)
+(package-install 'default-text-scale)
 (add-hook 'after-init-hook 'default-text-scale-mode)
-
-(require-package 'disable-mouse)
 
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative)
 
-(require-package 'color-theme-approximate)
+(package-install 'color-theme-approximate)
 (color-theme-approximate-on)
 
 (provide 'init-ui)

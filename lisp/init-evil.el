@@ -1,19 +1,21 @@
-(require-package 'evil)
+(package-install 'evil)
+(require 'evil)
 (evil-mode 1)
 
-(require-package 'evil-escape)
+(package-install 'evil-escape)
 (evil-escape-mode 1)
 (setq-default evil-escape-key-sequence "jk")
 (setq-default evil-escape-delay 0.2)
 (setq evil-escape-inhibit-functions '(evil-visual-state-p))
 
+(package-install 'evil-terminal-cursor-changer)
 (unless (display-graphic-p)
-  (require-package 'evil-terminal-cursor-changer)
+  (require 'evil-terminal-cursor-changer)
   (evil-terminal-cursor-changer-activate) ; or (etcc-on)
   (blink-cursor-mode 0)
   )
 
-(require-package 'avy)
+(package-install 'avy)
 (define-key evil-normal-state-map (kbd "s") 'avy-goto-char-2)
 (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
 (define-key evil-visual-state-map (kbd "C-u") 'evil-scroll-up)
@@ -42,7 +44,7 @@
 (my-evil-define-and-bind-text-object "r" "\{\{" "\}\}")
 ;; }}
 
-(require-package 'counsel)
+(package-install 'counsel)
 (ivy-mode)
 (setq ivy-use-virtual-buffers t)
 (setq enable-recursive-minibuffers t)
@@ -67,7 +69,8 @@
 (recentf-mode 1)
 (global-set-key (kbd "C-x C-r") 'counsel-recentf)
 
-(require-package 'general)
+(package-install 'general)
+(require 'general)
 (general-create-definer my-space-leader-def
   :prefix "SPC"
   :states '(normal visual))
@@ -85,12 +88,13 @@
   "bb" 'ivy-switch-buffer
   "t" 'tags-search)
 
-(require-package 'powerline-evil)
+(package-install 'powerline-evil)
+(require 'powerline-evil)
 (powerline-evil-vim-color-theme)
 (display-time-mode t)
 
 ;; flycheck
-(require-package 'flycheck)
+(package-install 'flycheck)
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (with-eval-after-load 'flycheck
   (setq flycheck-check-syntax-automatically '(save mode-enabled))

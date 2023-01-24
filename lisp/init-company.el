@@ -1,4 +1,4 @@
-(require-package 'company)
+(package-install 'company)
 (add-hook 'after-init-hook 'global-company-mode)
 
 (defvar my-company-select-by-number-p t
@@ -38,7 +38,8 @@ In that case, insert the number."
      (number-sequence 0 9)))
   )
 
-(require-package 'yasnippet)
+(package-install 'yasnippet)
+(require 'yasnippet)
 (yas-global-mode 1)
 
 (package-install 'eglot)
@@ -52,5 +53,6 @@ In that case, insert the number."
 
 (add-hook 'c-mode-hook 'eglot-ensure)
 (add-hook 'c++-mode-hook 'eglot-ensure)
+(add-hook 'cuda-mode-hook 'eglot-ensure)
 
 (provide 'init-company)
