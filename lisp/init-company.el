@@ -7,7 +7,7 @@
 (with-eval-after-load 'company
   (define-key company-active-map (kbd "C-w") 'evil-delete-backward-word)
   (setq company-dabbrev-downcase nil)
-  (setq company-idle-delay 0.1)
+  (setq company-idle-delay 0)
   (setq company-clang-insert-arguments nil)
   (setq company-show-numbers t)
   (setq company-minimum-prefix-length 1)
@@ -54,5 +54,8 @@ In that case, insert the number."
 (add-hook 'c-mode-hook 'eglot-ensure)
 (add-hook 'c++-mode-hook 'eglot-ensure)
 (add-hook 'cuda-mode-hook 'eglot-ensure)
+
+(package-install 'dtrt-indent)
+(dtrt-indent-global-mode 1)
 
 (provide 'init-company)

@@ -44,6 +44,9 @@
 (my-evil-define-and-bind-text-object "r" "\{\{" "\}\}")
 ;; }}
 
+(evil-add-command-properties #'find-file-at-point :jump t)
+(evil-set-undo-system 'undo-redo)
+
 (package-install 'counsel)
 (ivy-mode)
 (setq ivy-use-virtual-buffers t)
@@ -106,5 +109,7 @@
 
 (save-place-mode 1)
 (global-auto-revert-mode 1)
+
+(electric-pair-mode 1)
 
 (provide 'init-evil)
