@@ -5,10 +5,13 @@
   "User can press number key to select company candidate.")
 
 (with-eval-after-load 'company
+  (define-key company-active-map (kbd "C-w") 'evil-delete-backward-word)
+  (setq company-dabbrev-downcase nil)
   (setq company-idle-delay 0.1)
   (setq company-clang-insert-arguments nil)
   (setq company-show-numbers t)
   (setq company-minimum-prefix-length 1)
+  (setq completion-ignore-case t)
   (defun my-company-number ()
     "Forward to `company-complete-number'.
 Unless the number is potentially part of the candidate.
@@ -37,5 +40,17 @@ In that case, insert the number."
 
 (require-package 'yasnippet)
 (yas-global-mode 1)
+
+(package-install 'eglot)
+(require 'eglot)
+(add-to-list 'eglot-server-programs '((c++-mode c-mode cuda-mode)
+				      . ("clangd"
+					 "-j=32"
+					 "--log=error"
+					 "--header-insertion=never"
+					 "--function-arg-placeholders=0")))
+
+(add-hook 'c-mode-hook 'eglot-ensure)
+(add-hook 'c++-mode-hook 'eglot-ensure)
 
 (provide 'init-company)

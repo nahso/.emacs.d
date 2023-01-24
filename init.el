@@ -31,7 +31,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(spacemacs-dark))
  '(package-selected-packages
-   '(yasnippet cuda-mode company flycheck powerline-evil general counsel avy evil-terminal-cursor-changer evil-escape evil color-theme-approximate disable-mouse default-text-scale spacemacs-theme command-log-mode scratch diminish exec-path-from-shell gnu-elpa-keyring-update fullframe seq saveplace ef-themes powerline ivy evil-snipe color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized)))
+   '(cuda-mode yasnippet company flycheck powerline-evil general counsel avy evil-terminal-cursor-changer evil-escape evil color-theme-approximate disable-mouse default-text-scale spacemacs-theme command-log-mode scratch diminish exec-path-from-shell gnu-elpa-keyring-update fullframe seq eglot saveplace ef-themes powerline ivy evil-snipe color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
