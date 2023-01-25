@@ -52,6 +52,9 @@
   :ensure t
   :hook (after-init . yas-global-mode))
 
+(use-package cuda-mode
+             :ensure t)
+
 (use-package eglot
   :ensure t
   :config
