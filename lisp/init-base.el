@@ -34,9 +34,16 @@
 ;; No gc for font caches
 (setq inhibit-compacting-font-caches t)
 
+;; auto pair
 (electric-pair-mode 1)
+
+;; Line number
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative)
+
+;; Disable blink
+(blink-cursor-mode 0)
+(setq visible-cursor nil)
 
 ;; Improve display
 (setq display-raw-bytes-as-hex t
