@@ -1,36 +1,47 @@
+(setq gc-cons-threshold most-positive-fixnum
+      gc-cons-percentage 0.6)
+
+;; Increase how much is read from processes in a single chunk (default is 4kb).
+;; `lsp-mode' benefits from that.
+(setq read-process-output-max (* 4 1024 1024))
+
+(require 'package)
+(setq package-archives
+      '(("melpa"  . "http://1.15.88.122/melpa/")
+        ("gnu"    . "http://1.15.88.122/gnu/")
+        ("nongnu" . "http://1.15.88.122/nongnu/")))
+
+;; Bootstrap `use-package'
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(eval-and-compile
+  (setq use-package-always-ensure nil)
+  (setq use-package-always-defer nil)
+  (setq use-package-always-demand nil)
+  (setq use-package-expand-minimally nil)
+  (setq use-package-enable-imenu-support t))
+(eval-when-compile
+  (require 'use-package))
+
+(use-package quelpa
+  :ensure t
+  :commands quelpa
+  :custom
+  (quelpa-git-clone-depth 1)
+  (quelpa-self-upgrade-p nil)
+  (quelpa-update-melpa-p nil)
+  (quelpa-checkout-melpa-p nil))
+
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+(setq custom-file (locate-user-emacs-file "custom.el"))
 
-(require 'init-utils)
-(require 'init-site-lisp)
-(require 'init-elpa)
-(require 'init-exec-path) ;; Set up $PATH
-
-;; Load configs for specific features and modes
-(require-package 'diminish)
-(maybe-require-package 'scratch)
-(require-package 'command-log-mode)
-
+(require 'init-base)
 (require 'init-ui)
 (require 'init-evil)
 (require 'init-company)
+(require 'init-org)
 
-(add-hook 'org-mode-hook 'turn-on-auto-fill)
-(defadvice org-html-paragraph (before org-html-paragraph-advice
-                                        (paragraph contents info) activate)
-    "Join consecutive Chinese lines into a single long line without
-unwanted space when exporting org-mode to html."
-    (let* ((origin-contents (ad-get-arg 1))
-           (fix-regexp "[[:multibyte:]]")
-           (fixed-contents
-            (replace-regexp-in-string
-             (concat
-              "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
-      (ad-set-arg 1 fixed-contents)))
-
-(setq make-backup-files nil) ; stop creating backup~ files
-(setq auto-save-default nil) ; stop creating #autosave# files
-
-(setq custom-file (concat user-emacs-directory "custom.el"))
-(load custom-file 'noerror)
+(load custom-file 'no-error 'no-message)
 
 (provide 'init)

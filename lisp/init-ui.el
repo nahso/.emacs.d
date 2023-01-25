@@ -1,48 +1,33 @@
-(package-install 'doom-themes)
-(require 'doom-themes)
-(setq doom-themes-enable-bold t
-      doom-themes-enable-italic t)
-(load-theme 'doom-Iosvkem t)
+(use-package color-theme-approximate
+  :ensure t
+  :config
+  (color-theme-approximate-on))
 
-(setq use-file-dialog nil)
-(setq use-dialog-box nil)
-(setq inhibit-startup-screen t)
+(use-package doom-themes
+  :ensure t
+  :config
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t)
+  (load-theme 'doom-Iosvkem t)
+  (doom-themes-org-config))
 
-;; Window size and features
-(setq-default
- window-resize-pixelwise t
- frame-resize-pixelwise t)
+(use-package doom-modeline
+  :ensure t
+  :hook (after-init . doom-modeline-mode)
+  :custom
+  (doom-modeline-irc nil)
+  (doom-modeline-mu4e nil)
+  (doom-modeline-gnus nil)
+  (doom-modeline-github nil)
+  (doom-modeline-persp-name nil)
+  (doom-modeline-icon nil)
+  (doom-modeline-unicode-fallback nil)
+  (doom-modeline-enable-word-count nil))
 
-(when (fboundp 'tool-bar-mode)
-  (tool-bar-mode -1))
-(when (fboundp 'set-scroll-bar-mode)
-  (set-scroll-bar-mode nil))
-
-(menu-bar-mode -1)
-
-(let ((no-border '(internal-border-width . 0)))
-  (add-to-list 'default-frame-alist no-border)
-  (add-to-list 'initial-frame-alist no-border))
-
-(setq frame-title-format
-      '((:eval (if (buffer-file-name)
-		   (abbreviate-file-name (buffer-file-name))
-		 "%b"))))
-
-;; Non-zero values for `line-spacing' can mess up ansi-term and co,
-;; so we zero it explicitly in those cases.
-(add-hook 'term-mode-hook
-	  (lambda ()
-	    (setq line-spacing 0)))
-
-;; Change global font size easily
-(package-install 'default-text-scale)
-(add-hook 'after-init-hook 'default-text-scale-mode)
-
-(global-display-line-numbers-mode 1)
-(setq display-line-numbers-type 'relative)
-
-(package-install 'color-theme-approximate)
-(color-theme-approximate-on)
+(use-package help
+  :ensure nil
+  :custom
+  (help-window-select t)
+  (help-enable-variable-value-editing t))
 
 (provide 'init-ui)
