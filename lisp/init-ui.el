@@ -8,7 +8,7 @@
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
-  (load-theme 'doom-Iosvkem t)
+  (load-theme 'doom-one t)
   (doom-themes-org-config))
 
 (use-package doom-modeline
