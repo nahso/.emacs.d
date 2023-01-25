@@ -41,6 +41,7 @@
 (require 'init-evil)
 (require 'init-company)
 (require 'init-org)
+(require 'init-git)
 
 (load custom-file 'no-error 'no-message)
 
