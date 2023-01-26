@@ -3,6 +3,9 @@
   :config
   (color-theme-approximate-on))
 
+(use-package modus-themes
+  :ensure t)
+
 (use-package doom-themes
   :ensure t
   :config

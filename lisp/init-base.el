@@ -68,7 +68,7 @@
 (setq-default tab-width 4)
 
 ;; Font size
-(set-face-attribute 'default nil :height 125)
+(set-face-attribute 'default nil :height 120)
 
 ;; Sane defaults
 (setq use-short-answers t)
