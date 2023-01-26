@@ -1,5 +1,6 @@
 (use-package magit
-  :ensure t)
+  :ensure t
+  :bind (("C-x g" . magit-status)))
 
 (use-package git-gutter
   :ensure t
