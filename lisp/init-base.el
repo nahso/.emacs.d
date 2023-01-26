@@ -68,7 +68,9 @@
 (setq-default tab-width 4)
 
 ;; Font size
-(set-face-attribute 'default nil :height 120)
+(when (display-graphic-p)
+  (add-to-list 'default-frame-alist '(fullscreen . maximized))
+  (set-face-attribute 'default nil :height 135))
 
 ;; Sane defaults
 (setq use-short-answers t)

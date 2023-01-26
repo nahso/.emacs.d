@@ -12,6 +12,8 @@ unwanted space when exporting org-mode to html."
             (replace-regexp-in-string
              (concat
               "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
-      (ad-set-arg 1 fixed-contents))))
+      (ad-set-arg 1 fixed-contents)))
+  :custom
+  (org-html-validation-link nil))
 
 (provide 'init-org)

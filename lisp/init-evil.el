@@ -58,6 +58,19 @@
   :config
   (evil-terminal-cursor-changer-activate))
 
+(use-package evil-surround
+  :ensure t
+  :config
+  (global-evil-surround-mode 1)
+  (add-hook 'org-mode-hook (lambda ()
+                             (push '(?\* . (" *" . "* ")) evil-surround-pairs-alist)
+                             (push '(?\+ . (" +" . "+ ")) evil-surround-pairs-alist)
+                             (push '(?\/ . (" /" . "/ ")) evil-surround-pairs-alist)
+                             (push '(?\~ . (" ~" . "~ ")) evil-surround-pairs-alist)
+                             (push '(?\= . (" =" . "= ")) evil-surround-pairs-alist)
+                             (push '(?\$ . (" $" . "$ ")) evil-surround-pairs-alist)
+                             (push '(?\_ . (" _" . "_ ")) evil-surround-pairs-alist))))
+
 (use-package counsel
   :ensure t
   :hook (after-init . ivy-mode)
