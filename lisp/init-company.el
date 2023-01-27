@@ -39,6 +39,14 @@
   (company-minimum-prefix-length 1)
   (completion-ignore-case t))
 
+(use-package company-fuzzy
+  :ensure t
+  :hook (company-mode . company-fuzzy-mode)
+  :init
+  (setq company-fuzzy-sorting-backend 'alphabetic
+        company-fuzzy-prefix-on-top nil
+        company-fuzzy-trigger-symbols '("." "->" "<" "\"" "'" "@")))
+
 (use-package flycheck
   :ensure t
   :hook (after-init . global-flycheck-mode)
@@ -51,6 +59,9 @@
 (use-package yasnippet
   :ensure t
   :hook (after-init . yas-global-mode))
+
+(use-package yasnippet-snippets
+  :ensure t)
 
 (use-package cuda-mode
              :ensure t)

@@ -6,10 +6,13 @@
 (setq read-process-output-max (* 4 1024 1024))
 
 (require 'package)
-(setq package-archives
-      '(("melpa"  . "http://1.15.88.122/melpa/")
-        ("gnu"    . "http://1.15.88.122/gnu/")
-        ("nongnu" . "http://1.15.88.122/nongnu/")))
+(setq package-archives '(("gnu" . "http://mirrors.ustc.edu.cn/elpa/gnu/")
+                         ("melpa" . "http://mirrors.ustc.edu.cn/elpa/melpa/")
+                         ("nongnu" . "http://mirrors.ustc.edu.cn/elpa/nongnu/")))
+;; (setq package-archives
+;;       '(("melpa"  . "http://1.15.88.122/melpa/")
+;;         ("gnu"    . "http://1.15.88.122/gnu/")
+;;         ("nongnu" . "http://1.15.88.122/nongnu/")))
 
 ;; Bootstrap `use-package'
 (unless (package-installed-p 'use-package)
