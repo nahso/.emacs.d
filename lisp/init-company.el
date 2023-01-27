@@ -39,12 +39,16 @@
   (company-minimum-prefix-length 1)
   (completion-ignore-case t))
 
+(use-package flx-ido
+  :ensure t
+  :hook (after-init . flx-ido-mode))
+
 (use-package company-fuzzy
   :ensure t
   :hook (company-mode . company-fuzzy-mode)
   :init
-  (setq company-fuzzy-sorting-backend 'alphabetic
-        company-fuzzy-prefix-on-top nil
+  (setq company-fuzzy-sorting-backend 'flx
+        company-fuzzy-prefix-on-top t
         company-fuzzy-trigger-symbols '("." "->" "<" "\"" "'" "@")))
 
 (use-package flycheck
