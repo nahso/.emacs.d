@@ -88,6 +88,18 @@
   (ivy-use-virtual-buffers t)
   (enable-recursive-minibuffers t))
 
+(use-package counsel-etags
+  :ensure t
+  :bind (("C-]" . counsel-etags-find-tag-at-point))
+  :init
+  (add-hook 'prog-mode-hook
+        (lambda ()
+          (add-hook 'after-save-hook
+            'counsel-etags-virtual-update-tags 'append 'local)))
+  :config
+  (setq counsel-etags-update-interval 60)
+  (push "build" counsel-etags-ignore-directories))
+
 (use-package general
   :ensure t
   :config
@@ -96,7 +108,7 @@
     :states '(normal visual))
   (my-space-leader-def
     "fs" 'save-buffer
-    "ff" 'find-file
+    "ff" 'counsel-find-file
     "fr" 'counsel-recentf
     "wh" 'evil-window-left
     "wl" 'evil-window-right
@@ -106,6 +118,9 @@
     "wd" 'delete-window
     "wc" 'delete-window
     "bb" 'ivy-switch-buffer
-    "t" 'tags-search))
+    "t" 'counsel-etags-list-tag
+    "fg" 'counsel-git
+    "s" 'swiper-thing-at-point
+    "g" 'counsel-rg))
 
 (provide 'init-evil)
