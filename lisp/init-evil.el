@@ -1,8 +1,51 @@
 (use-package avy
   :ensure t)
 
+(use-package counsel-etags
+  :ensure t
+;  :bind (("C-]" . counsel-etags-find-tag-at-point))
+  :init
+  (add-hook 'prog-mode-hook
+        (lambda ()
+          (add-hook 'after-save-hook
+            'counsel-etags-virtual-update-tags 'append 'local)))
+  :config
+  (setq counsel-etags-update-interval 60)
+  (push "build" counsel-etags-ignore-directories))
+
+(defvar my-initial-evil-state-setup
+  '((minibuffer-inactive-mode . emacs)
+    (grep-mode . emacs)
+    (Info-mode . emacs)
+    (term-mode . emacs)
+    (anaconda-nav-mode . emacs)
+    (log-edit-mode . emacs)
+    (vc-log-edit-mode . emacs)
+    (diff-mode . emacs)
+    (neotree-mode . emacs)
+    (w3m-mode . emacs)
+    (gud-mode . emacs)
+    (help-mode . emacs)
+    (eshell-mode . emacs)
+    (shell-mode . emacs)
+    (vterm-mode . emacs)
+    (xref--xref-buffer-mode . emacs)
+    (epa-key-list-mode . emacs)
+    (sr-mode . emacs)
+    (profiler-report-mode . emacs)
+    (dired-mode . emacs)
+    (compilation-mode . emacs)
+    (speedbar-mode . emacs)
+    (ivy-occur-mode . emacs)
+    (ivy-occur-grep-mode . normal)
+    (messages-buffer-mode . normal)
+    (js2-error-buffer-mode . emacs))
+  "Default evil state per major mode.")
+;; }}
+
 (use-package evil
   :ensure t
+  :after (counsel-etags)
   :init
   :hook (after-init . evil-mode)
   :bind (([remap evil-quit] . kill-this-buffer)
@@ -10,6 +53,7 @@
          ("C-u" . evil-scroll-up)
          :map evil-normal-state-map
          ("C-u" . evil-scroll-up)
+         ("C-]" . counsel-etags-find-tag-at-point)
          ("s" . avy-goto-char-2))
   :config
   (evil-add-command-properties #'find-file-at-point :jump t)
@@ -37,6 +81,9 @@
   ;; angular template
   (my-evil-define-and-bind-text-object "r" "\{\{" "\}\}")
   ;; }}
+
+  (dolist (p my-initial-evil-state-setup)
+    (evil-set-initial-state (car p) (cdr p)))
   :custom
   ;; undo will never freeze my Emacs
   (evil-undo-system 'undo-redo)
@@ -87,18 +134,6 @@
   :custom
   (ivy-use-virtual-buffers t)
   (enable-recursive-minibuffers t))
-
-(use-package counsel-etags
-  :ensure t
-  :bind (("C-]" . counsel-etags-find-tag-at-point))
-  :init
-  (add-hook 'prog-mode-hook
-        (lambda ()
-          (add-hook 'after-save-hook
-            'counsel-etags-virtual-update-tags 'append 'local)))
-  :config
-  (setq counsel-etags-update-interval 60)
-  (push "build" counsel-etags-ignore-directories))
 
 (use-package general
   :ensure t

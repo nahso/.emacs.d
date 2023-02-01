@@ -71,6 +71,12 @@
 
 (use-package eglot
   :ensure t
+  :bind (:map eglot-mode-map
+              ("C-c l a" . eglot-code-actions)
+              ("C-c l r" . eglot-rename)
+              ("C-c l f" . eglot-format)
+              ("C-c l d" . eldoc))
+  :hook (eglot-managed-mode . (lambda () (flymake-mode -1)))
   :config
   (add-to-list 'eglot-server-programs '((c++-mode c-mode cuda-mode)
                                         . ("clangd"
@@ -78,6 +84,7 @@
                                            "--log=error"
                                            "--header-insertion=never"
                                            "--function-arg-placeholders=0")))
+  (add-to-list 'eglot-server-programs '(python-mode . ("pyright-langserver" "--stdio")))
   (add-hook 'c-mode-hook 'eglot-ensure)
   (add-hook 'c++-mode-hook 'eglot-ensure)
   (add-hook 'cuda-mode-hook 'eglot-ensure))
