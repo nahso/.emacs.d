@@ -301,4 +301,11 @@
   :bind ("M-w" . clipetty-kill-ring-save)
   :hook (after-init . global-clipetty-mode))
 
+;(defun begin-of-current-block()
+;  (interactive)
+;  (line-move -1 nil nil t)
+;  (while (or (eq 32 (following-char))
+;             (eq 10 (following-char)))
+;    (line-move -1 nil nil t)))
+
 (provide 'init-base)

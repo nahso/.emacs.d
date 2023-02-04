@@ -34,6 +34,11 @@
   (help-window-select t)
   (help-enable-variable-value-editing t))
 
+(use-package highlight-indent-guides
+  :ensure t
+  :hook (python-mode . highlight-indent-guides-mode)
+  :custom
+  (highlight-indent-guides-method 'character))
 ;(defun load-treesitter()
 ;  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.2")
 ;  (setq site-lisp-path (expand-file-name "site-lisp/" user-emacs-directory))
