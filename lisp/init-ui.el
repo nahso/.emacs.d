@@ -34,4 +34,17 @@
   (help-window-select t)
   (help-enable-variable-value-editing t))
 
+;(defun load-treesitter()
+;  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.2")
+;  (setq site-lisp-path (expand-file-name "site-lisp/" user-emacs-directory))
+;  (add-to-list 'load-path (concat site-lisp-path "elisp-tree-sitter/core"))
+;  (add-to-list 'load-path (concat site-lisp-path "elisp-tree-sitter/lisp"))
+;  (add-to-list 'load-path (concat site-lisp-path "elisp-tree-sitter/langs"))
+;  (require 'tree-sitter)
+;  (require 'tree-sitter-hl)
+;  (require 'tree-sitter-langs)
+;  (require 'tree-sitter-debug)
+;  (require 'tree-sitter-query))
+;(add-hook 'after-init-hook 'load-treesitter)
+
 (provide 'init-ui)

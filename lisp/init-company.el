@@ -31,6 +31,8 @@
      (lambda (x)
        (define-key map (format "%d" x) 'my-company-number))
      (number-sequence 0 9)))
+  ;; remove redundant candidates
+  (add-to-list 'company-transformers #'delete-dups)
   :custom
   (company-dabbrev-downcase nil)
   (company-idle-delay 0)
@@ -49,6 +51,13 @@
 ;  :init
 ;  (setq company-fuzzy-sorting-backend 'flx
 ;        company-fuzzy-trigger-symbols '("." "->" "<" "\"" "'" "@")))
+
+(use-package company-ctags
+  :ensure t
+  :hook (company-mode . company-ctags-auto-setup)
+  :custom
+  (company-ctags-ignore-case t)
+  (company-ctags-fuzzy-match-p nil))
 
 (use-package flycheck
   :ensure t
