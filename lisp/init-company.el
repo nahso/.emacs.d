@@ -3,6 +3,7 @@
   :hook (after-init . global-company-mode)
   :bind (:map company-active-map
               ("C-w" . evil-delete-backward-word)
+              ("C-s" . counsel-company)
               )
   :config
   (defvar my-company-select-by-number-p t
