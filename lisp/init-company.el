@@ -81,23 +81,39 @@
 
 (use-package eglot
   :ensure t
-  :bind (:map eglot-mode-map
-              ("C-c l a" . eglot-code-actions)
-              ("C-c l r" . eglot-rename)
-              ("C-c l f" . eglot-format)
-              ("C-c l d" . eldoc))
-  :hook (eglot-managed-mode . (lambda () (flymake-mode -1)))
+  ;:hook (eglot-managed-mode . (lambda () (flymake-mode -1)))
   :config
+  (advice-add 'jsonrpc--log-event :around
+              (lambda (_orig-func &rest _)))
+  (setq eglot-connect-timeout 120)
+  (setq eldoc-echo-area-use-multiline-p 3
+        eldoc-echo-area-display-truncation-message nil)
+  (set-face-attribute 'eglot-highlight-symbol-face nil
+                      :background "#2257a0")
   (add-to-list 'eglot-server-programs '((c++-mode c-mode cuda-mode)
                                         . ("clangd"
-                                           "-j=32"
+                                           "-j=16"
                                            "--log=error"
                                            "--header-insertion=never"
                                            "--function-arg-placeholders=0")))
   (add-to-list 'eglot-server-programs '(python-mode . ("pyright-langserver" "--stdio")))
+  (add-hook 'python-mode-hook 'eglot-ensure)
   (add-hook 'c-mode-hook 'eglot-ensure)
   (add-hook 'c++-mode-hook 'eglot-ensure)
   (add-hook 'cuda-mode-hook 'eglot-ensure))
+
+(use-package general
+  :config
+  (general-create-definer my-space-leader-def
+    :prefix "SPC"
+    :states '(normal visual))
+  (my-space-leader-def
+    "ed" 'xref-find-definitions
+    "er" 'xref-find-references
+    "en" 'eglot-rename
+    "ea" 'eglot-code-actions
+    "ef" 'eglot-format
+    "eh" 'eldoc))
 
 (use-package dtrt-indent
   :ensure t
