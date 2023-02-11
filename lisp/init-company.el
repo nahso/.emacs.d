@@ -88,8 +88,6 @@
   (setq eglot-connect-timeout 120)
   (setq eldoc-echo-area-use-multiline-p 3
         eldoc-echo-area-display-truncation-message nil)
-  (set-face-attribute 'eglot-highlight-symbol-face nil
-                      :background "#2257a0")
   (add-to-list 'eglot-server-programs '((c++-mode c-mode cuda-mode)
                                         . ("clangd"
                                            "-j=16"
