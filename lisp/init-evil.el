@@ -68,6 +68,10 @@
   (evil-add-command-properties #'find-file-at-point :jump t)
   (evil-add-command-properties #'counsel-etags-list-tag :jump t)
 
+  (add-hook 'evil-insert-state-exit-hook
+          (lambda ()
+            (call-interactively #'save-buffer)))
+
   ;; {{ define my own text objects, works on evil v1.0.9 using older method
   ;; @see http://stackoverflow.com/questions/18102004/emacs-evil-mode-how-to-create-a-new-text-object-to-select-words-with-any-non-sp
   (defmacro my-evil-define-and-bind-text-object (key start-regex end-regex)
@@ -157,8 +161,8 @@
     "fr" 'counsel-recentf
     "wh" 'evil-window-left
     "wl" 'evil-window-right
-    "wj" 'evil-window-bottom
-    "wk" 'evil-window-top
+    "wj" 'evil-window-down
+    "wk" 'evil-window-up
     "wo" 'delete-other-windows
     "wd" 'delete-window
     "wc" 'delete-window

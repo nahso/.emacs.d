@@ -102,16 +102,21 @@
 
 (use-package general
   :config
-  (general-create-definer my-space-leader-def
-    :prefix "SPC"
-    :states '(normal visual))
   (my-space-leader-def
     "ed" 'xref-find-definitions
     "er" 'xref-find-references
     "en" 'eglot-rename
     "ea" 'eglot-code-actions
     "ef" 'eglot-format
+    "ecn" 'flymake-goto-next-error
+    "ecp" 'flymake-goto-prev-error
     "eh" 'eldoc))
+
+(use-package evil
+  :ensure nil
+  :config
+  (evil-add-command-properties #'flymake-goto-next-error :jump t)
+  (evil-add-command-properties #'flymake-goto-prev-error :jump t))
 
 (use-package dtrt-indent
   :ensure t

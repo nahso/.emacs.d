@@ -100,6 +100,7 @@
 (use-package simple
   :ensure nil
   :custom
+  (global-visual-line-mode 1)
   ;; show line/column/filesize in modeline
   (line-number-mode t)
   (column-number-mode t)
