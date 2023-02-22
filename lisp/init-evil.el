@@ -170,6 +170,7 @@
     "t" 'counsel-etags-list-tag
     "fg" 'counsel-git
     "s" 'swiper-thing-at-point
-    "g" 'counsel-rg))
+    "g" 'counsel-rg
+    "rr" 'revert-buffer-quick))
 
 (provide 'init-evil)
