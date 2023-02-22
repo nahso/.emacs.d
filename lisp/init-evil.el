@@ -70,7 +70,7 @@
 
   (add-hook 'evil-insert-state-exit-hook
           (lambda ()
-            (call-interactively #'save-buffer)))
+            (call-interactively #'do-auto-save)))
 
   ;; {{ define my own text objects, works on evil v1.0.9 using older method
   ;; @see http://stackoverflow.com/questions/18102004/emacs-evil-mode-how-to-create-a-new-text-object-to-select-words-with-any-non-sp
