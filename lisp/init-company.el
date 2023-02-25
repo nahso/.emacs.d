@@ -60,14 +60,14 @@
   (company-ctags-ignore-case t)
   (company-ctags-fuzzy-match-p nil))
 
-(use-package flycheck
-  :ensure t
-  :hook (after-init . global-flycheck-mode)
-  :config
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  (setq flycheck-checkers (delq 'emacs-lisp-checkdoc flycheck-checkers))
-  (setq flycheck-checkers (delq 'html-tidy flycheck-checkers))
-  (setq flycheck-standard-error-navigation nil))
+;(use-package flycheck
+;  :ensure t
+;  :hook (after-init . global-flycheck-mode)
+;  :config
+;  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+;  (setq flycheck-checkers (delq 'emacs-lisp-checkdoc flycheck-checkers))
+;  (setq flycheck-checkers (delq 'html-tidy flycheck-checkers))
+;  (setq flycheck-standard-error-navigation nil))
 
 (use-package yasnippet
   :ensure t
@@ -88,6 +88,7 @@
   (setq eglot-connect-timeout 120)
   (setq eldoc-echo-area-use-multiline-p 3
         eldoc-echo-area-display-truncation-message nil)
+  (setq eldoc-echo-area-use-multiline-p nil)
   (add-to-list 'eglot-server-programs '((c++-mode c-mode cuda-mode)
                                         . ("clangd"
                                            "-j=16"
