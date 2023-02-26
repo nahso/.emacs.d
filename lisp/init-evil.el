@@ -99,8 +99,7 @@
   (evil-undo-system 'undo-redo)
   ;; Switch to the new window after splitting
   (evil-split-window-below t)
-  (evil-vsplit-window-right t)
-  (evil-want-fine-undo t))
+  (evil-vsplit-window-right t))
 
 (use-package evil-escape
   :ensure t
