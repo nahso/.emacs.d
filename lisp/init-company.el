@@ -42,6 +42,16 @@
   (company-minimum-prefix-length 1)
   (completion-ignore-case t))
 
+(use-package company
+  :ensure nil
+  :after (evil)
+  :config
+  (mapc #'evil-declare-change-repeat
+        '(company-complete-common
+          company-select-next
+          company-select-previous
+          company-complete-selection)))
+
 ;(use-package flx-ido
 ;  :ensure t
 ;  :hook (after-init . flx-ido-mode))
