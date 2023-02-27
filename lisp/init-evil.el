@@ -67,6 +67,7 @@
   :config
   (evil-add-command-properties #'find-file-at-point :jump t)
   (evil-add-command-properties #'counsel-etags-list-tag :jump t)
+  (evil-add-command-properties #'counsel-ag :jump t)
 
   ;; {{ define my own text objects, works on evil v1.0.9 using older method
   ;; @see http://stackoverflow.com/questions/18102004/emacs-evil-mode-how-to-create-a-new-text-object-to-select-words-with-any-non-sp
@@ -137,7 +138,7 @@
          ("C-x C-r" . counsel-recentf)
          ("C-x g" . counsel-git)
          ("C-x j" . counsel-git-grep)
-         ("C-x k" . counsel-rg)
+         ("C-x k" . counsel-ag)
          :map minibuffer-local-map
          ("C-r" . counsel-minibuffer-history))
   :custom
@@ -165,7 +166,7 @@
     "t" 'counsel-etags-list-tag
     "fg" 'counsel-git
     "s" 'swiper-thing-at-point
-    "g" 'counsel-rg
+    "g" 'counsel-ag
     "rr" 'revert-buffer-quick))
 
 (provide 'init-evil)
