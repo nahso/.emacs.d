@@ -32,6 +32,8 @@
      (lambda (x)
        (define-key map (format "%d" x) 'my-company-number))
      (number-sequence 0 9)))
+  (mapc #'evil-declare-change-repeat
+        '(my-company-number))
   ;; remove redundant candidates
   (add-to-list 'company-transformers #'delete-dups)
   :custom
@@ -41,16 +43,6 @@
   (company-show-numbers t)
   (company-minimum-prefix-length 1)
   (completion-ignore-case t))
-
-(use-package company
-  :ensure nil
-  :after (evil)
-  :config
-  (mapc #'evil-declare-change-repeat
-        '(company-complete-common
-          company-select-next
-          company-select-previous
-          company-complete-selection)))
 
 ;(use-package flx-ido
 ;  :ensure t
