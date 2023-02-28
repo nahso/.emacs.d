@@ -128,6 +128,13 @@
                              (push '(?\$ . (" $" . "$ ")) evil-surround-pairs-alist)
                              (push '(?\_ . (" _" . "_ ")) evil-surround-pairs-alist))))
 
+(use-package evil-args
+  :ensure t
+  :after (evil)
+  :config
+  (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
+  (define-key evil-outer-text-objects-map "a" 'evil-outer-arg))
+
 (use-package counsel
   :ensure t
   :hook (after-init . ivy-mode)
