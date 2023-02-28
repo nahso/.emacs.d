@@ -69,6 +69,9 @@
   (evil-add-command-properties #'counsel-etags-list-tag :jump t)
   (evil-add-command-properties #'counsel-ag :jump t)
 
+  (evil-declare-key 'normal org-mode-map
+    (kbd "TAB") 'org-cycle)
+
   ;; {{ define my own text objects, works on evil v1.0.9 using older method
   ;; @see http://stackoverflow.com/questions/18102004/emacs-evil-mode-how-to-create-a-new-text-object-to-select-words-with-any-non-sp
   (defmacro my-evil-define-and-bind-text-object (key start-regex end-regex)
