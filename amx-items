@@ -1,0 +1,5 @@
+ flymake-goto-diagnostic
+ flymake-menu
+ cd
+)
+

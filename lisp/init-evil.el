@@ -151,9 +151,16 @@
          ("C-x k" . counsel-ag)
          :map minibuffer-local-map
          ("C-r" . counsel-minibuffer-history))
+  :config
+  (setq ivy-re-builders-alist
+        '((t . ivy--regex-fuzzy)))
   :custom
   (ivy-use-virtual-buffers t)
   (enable-recursive-minibuffers t))
+
+(use-package flx
+  :ensure t
+  :after counsel)
 
 (use-package general
   :ensure t
